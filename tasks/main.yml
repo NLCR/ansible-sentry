@@ -1,7 +1,7 @@
 ---
 - include: provision.yml
 
-- name: PIP | sentry is installed
+- name: PIP | latest sentry is installed
   pip:
     name: sentry
     state: latest
@@ -38,13 +38,9 @@
 # SERVICES
 - name: services are running even after boot
   service:
-    name: '{{ item }}'
+    name: supervisord
     state: started
     enabled: yes
-  with_items:
-  - redis
-  - postgresql
-  - supervisord
 
 # SENTRY DB
 - name: db tables are ready
