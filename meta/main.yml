@@ -217,5 +217,5 @@ galaxy_info:
     # alphanumeric characters. Maximum 20 tags per role.
 
   dependencies:
-    - role: NLCR.postgresql
-    - role: NLCR.supervisor
+    - src: NLCR.postgresql
+    - src: NLCR.supervisor
