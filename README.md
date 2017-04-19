@@ -36,11 +36,16 @@ NLCR.supervisor
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+- name: Sentry database
+  hosts: database
+  roles:
+  - { role: NLCR.postgresql, postgresql: [{ user: vagrant, pass: sentry, db: sentry }] }
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+- name: Sentry app
+  hosts: app
+  roles:
+  - NLCR.sentry
+  - NLCR.supervisor
 
 License
 -------
