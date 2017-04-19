@@ -1,0 +1,53 @@
+---
+- include: provision.yml
+
+- name: PIP | sentry is installed
+  pip:
+    name: sentry
+    state: latest
+  tags: packages
+
+- name: init sentry configuration to /etc/sentry
+  #  shell: '{{ sentry_virtualenv }}/bin/sentry init /etc/sentry'
+  command: '/usr/bin/sentry init /etc/sentry'
+  tags: config
+  args:
+    creates: /etc/sentry/sentry.conf.py
+
+- name: '/var/log/sentry is writable for {{ sentry_user }}'
+  file:
+    path: /var/log/sentry
+    state: directory
+    mode: 'g+w'
+    owner: '{{ sentry_user }}'
+    group: '{{ sentry_user }}'
+  tags: permissions
+
+
+- name: sentry configuration is present
+  template: src="{{ item.src }}" dest="{{ item.dest }}"
+  with_items:
+    - { src: "sentry.conf.py.j2", dest: "/etc/sentry/sentry.conf.py" }
+    - { src: "config.yml.j2", dest: "/etc/sentry/config.yml" }
+    - { src: "sentry-worker.ini.j2", dest: "/etc/supervisord.d/sentry-worker.ini" }
+    - { src: "sentry-cron.ini.j2", dest: "/etc/supervisord.d/sentry-cron.ini" }
+    - { src: "sentry-web.ini.j2", dest: "/etc/supervisord.d/sentry-web.ini" }
+  tags: config
+  notify: restart supervisor
+
+# SERVICES
+- name: services are running even after boot
+  service:
+    name: '{{ item }}'
+    state: running
+    enabled: yes
+  with_items:
+  - redis
+  - postgresql
+  - supervisord
+
+# SENTRY DB
+- name: db tables are ready
+  command: '/usr/bin/sentry --config /etc/sentry/ upgrade --noinput'
+  tags: db
+  become_user: '{{  sentry_db_user }}'

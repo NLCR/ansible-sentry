@@ -1,0 +1,10 @@
+[program:sentry-web]
+command=/usr/bin/sentry start
+environment=SENTRY_CONF=/etc/sentry
+user={{ sentry_user }}
+autostart=True
+autorestart=True
+stdout_logfile=/var/log/sentry/sentry-web_stdout.log
+stderr_logfile=/var/log/sentry/sentry-web_sterr.log
+redirect_stderr=True
+stopsignal=QUIT

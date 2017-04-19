@@ -1,0 +1,10 @@
+[program:sentry-worker]
+command=/usr/bin/sentry run worker
+environment=SENTRY_CONF="/etc/sentry"
+user={{ sentry_user }}
+autostart=True
+autorestart=True
+stdout_logfile=/var/log/sentry/sentry-worker_stdout.log
+stderr_logfile=/var/log/sentry/sentry-worker_sterr.log
+redirect_stderr=True
+stopsignal=QUIT

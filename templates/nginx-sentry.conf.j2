@@ -1,0 +1,16 @@
+server {
+    listen       80;
+    listen       443 ssl;
+    ssl_certificate      /etc/nginx/nginx-{{ sentry_hostname }}.crt;
+    ssl_certificate_key  /etc/nginx/nginx-{{ sentry_hostname }}.key;
+    server_name  {{ sentry_hostname }};
+
+    location / {
+      proxy_pass         http://localhost:9000;
+      proxy_redirect     off;
+    
+      proxy_set_header   Host              $host;
+      proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+      proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+}
