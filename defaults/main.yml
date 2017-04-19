@@ -1,5 +1,6 @@
 ---
 sentry_user: vagrant
+sentry_port: 9000
 
 sentry_db_user: vagrant
 sentry_db_pass: sentry

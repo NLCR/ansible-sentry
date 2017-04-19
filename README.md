@@ -14,12 +14,13 @@ Role Variables
 defaults/main.yml
 ```
 sentry_user: vagrant
+sentry_port: 9000
 
 sentry_db_user: vagrant
 sentry_db_pass: sentry
 sentry_db_name: sentry
 
-sentry_secret: "*nk=yh)t#^=%-rkeopyr@4u@2(fy6o-!upuv2%dncez12j$yj=" # A new key can be generated with `$ sentry config generate-secret-key`
+sentry_secret: '*nk=yh)t#^=%-rkeopyr@4u@2(fy6o-!upuv2%dncez12j$yj=' # A new key can be generated with `$ sentry config generate-secret-key`
 
 sentry_smtp_host: '{{ ansible_nodename }}'
 sentry_mail: 'sentry@{{ ansible_nodename }}'
