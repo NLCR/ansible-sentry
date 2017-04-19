@@ -9,18 +9,18 @@
     name: '{{ item }}'
   with_items:
 # Requirements from https://docs.getsentry.com/on-premise/server/installation/
-  -  python-setuptools
-  -  python-pip
-  -  python-devel
+  - python-setuptools
+  - python-pip
+  - python-devel
 # libxslt1-devel was not necessary on CentOS 7
-  -  gcc
-  -  libffi-devel
-  -  libjpeg-devel
-  -  libxml2-devel
-  -  libxslt-devel
-  -  libyaml-devel
+  - gcc
+  - libffi-devel
+  - libjpeg-devel
+  - libxml2-devel
+  - libxslt-devel
+  - libyaml-devel
 # Sentry is installed into virtualenv
-  -  python-virtualenv
+  - python-virtualenv
 # CentOS 7 specific dependencies for Sentry
   - gcc-c++
   - libpqxx-devel
