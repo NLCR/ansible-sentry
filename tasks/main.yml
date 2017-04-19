@@ -39,7 +39,7 @@
 - name: services are running even after boot
   service:
     name: '{{ item }}'
-    state: running
+    state: started
     enabled: yes
   with_items:
   - redis
