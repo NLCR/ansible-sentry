@@ -1,12 +1,16 @@
 Sentry
 =========
 
-A brief description of the role goes here.
+Role installs sentry to localhost:9000 and supervisor to localhost:9001
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+PostgreSQL and Redis
+
+```
+ansible-galaxy install NLCR.sentry NLCR.postgresql NLCR.redis
+```
 
 Role Variables
 --------------
@@ -44,7 +48,6 @@ sentry:
 Dependencies
 ------------
 
-NLCR.postgresql
 NLCR.supervisor
 
 Example Playbook
