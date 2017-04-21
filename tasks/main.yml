@@ -19,7 +19,7 @@
     state: directory
     mode: 'g+w'
     owner: '{{ sentry.user }}'
-    group: '{{ sentry.group }}'
+    group: '{{ sentry.group | default(omit)}}'
   tags: permissions
 
 

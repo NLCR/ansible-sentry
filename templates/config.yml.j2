@@ -8,13 +8,13 @@
 ###############
 
 mail.backend: 'smtp'  # Use dummy if you want to disable email entirely
-mail.host: '{{ sentry.smtp }}'
+mail.host: '{{ sentry.smtp | default(ansible_nodename) }}'
 # mail.port: 25
 # mail.username: ''
 # mail.password: ''
 # mail.use-tls: false
 # The email address to send on behalf of
-mail.from: '{{ sentry.mail }}'
+mail.from: '{{ sentry.mail | default(ansible_nodename)}}'
 
 # If you'd like to configure email replies, enable this.
 # mail.enable-replies: false
@@ -33,7 +33,7 @@ mail.from: '{{ sentry.mail }}'
 # If this file ever becomes compromised, it's important to regenerate your a new key
 # Changing this value will result in all current sessions being invalidated.
 # A new key can be generated with `$ sentry config generate-secret-key`
-system.secret-key: '{{ sentry.secret }}'
+system.secret-key: '{{ sentry.secret | default('*nk=yh)t#^=%-rkeopyr@4u@2(fy6o-!upuv2%dncez12j$yj=') }}'
 
 # The ``redis.clusters`` setting is used, unsurprisingly, to configure Redis
 # clusters. These clusters can be then referred to by name when configuring
@@ -42,8 +42,8 @@ redis.clusters:
   default:
     hosts:
       0:
-        host: {{ sentry.redis_host }}
-        port: {{ sentry.redis_port }}
+        host: {{ sentry.redis_host | default(ansible_nodename) }}
+        port: {{ sentry.redis_port | default(6379) }}
 
 ################
 # File storage #
