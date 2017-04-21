@@ -8,13 +8,13 @@
 ###############
 
 mail.backend: 'smtp'  # Use dummy if you want to disable email entirely
-mail.host: '{{ sentry_smtp_host }}'
+mail.host: '{{ sentry.smtp }}'
 # mail.port: 25
 # mail.username: ''
 # mail.password: ''
 # mail.use-tls: false
 # The email address to send on behalf of
-mail.from: '{{ sentry_mail }}'
+mail.from: '{{ sentry.mail }}'
 
 # If you'd like to configure email replies, enable this.
 # mail.enable-replies: false
@@ -33,7 +33,7 @@ mail.from: '{{ sentry_mail }}'
 # If this file ever becomes compromised, it's important to regenerate your a new key
 # Changing this value will result in all current sessions being invalidated.
 # A new key can be generated with `$ sentry config generate-secret-key`
-system.secret-key: '{{ sentry_secret }}'
+system.secret-key: '{{ sentry.secret }}'
 
 # The ``redis.clusters`` setting is used, unsurprisingly, to configure Redis
 # clusters. These clusters can be then referred to by name when configuring
@@ -42,8 +42,8 @@ redis.clusters:
   default:
     hosts:
       0:
-        host: 127.0.0.1
-        port: 6379
+        host: {{ sentry.redis_host }}
+        port: {{ sentry.redis_port }}
 
 ################
 # File storage #

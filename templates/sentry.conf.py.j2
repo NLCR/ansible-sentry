@@ -9,11 +9,11 @@ CONF_ROOT = os.path.dirname(__file__)
 DATABASES = {
     'default': {
         'ENGINE': 'sentry.db.postgres',
-        'NAME': 'sentry',
-        'USER': '{{ sentry_db_user }}',
-        'PASSWORD': '{{ sentry_db_pass }}',
-        'HOST': '',
-        'PORT': '',
+        'NAME': '{{ sentry.db_name }}',
+        'USER': '{{ sentry.db_user }}',
+        'PASSWORD': '{{ sentry.db_pass }}',
+        'HOST': '{{ sentry.db_host }}',
+        'PORT': '{{ sentry.db_port }}',
     }
 }
 
@@ -138,7 +138,7 @@ SENTRY_DIGESTS = 'sentry.digests.backends.redis.RedisBackend'
 # FORCE_SCRIPT_NAME = '/sentry'
 
 SENTRY_WEB_HOST = '0.0.0.0'
-SENTRY_WEB_PORT = {{ sentry_port }}
+SENTRY_WEB_PORT = {{ sentry.port }}
 SENTRY_WEB_OPTIONS = {
     # 'workers': 3,  # the number of web workers
     # 'protocol': 'uwsgi',  # Enable uwsgi protocol instead of http

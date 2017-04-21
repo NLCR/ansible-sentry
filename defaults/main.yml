@@ -1,14 +1,28 @@
 ---
-sentry_user: vagrant
-sentry_port: 9000
+sentry:
+  # supervisor will run sentry with this user
+  user: vagrant
+  group: vagrant 
 
-sentry_db_user: vagrant
-sentry_db_pass: sentry
-sentry_db_name: sentry
-
-sentry_secret: "*nk=yh)t#^=%-rkeopyr@4u@2(fy6o-!upuv2%dncez12j$yj=" # A new key can be generated with `$ sentry config generate-secret-key`
-
-sentry_smtp_host: '{{ ansible_nodename }}'
-sentry_mail: 'sentry@{{ ansible_nodename }}'
-sentry_hostname: '{{ ansible_nodename }}'
+  # hostname
+  hostname: '{{ ansible_nodename }}'
+  port: 9000
+  
+  # sentry secret for connection with app, A new key can be generated with `$ sentry config generate-secret-key`
+  secret: "*nk=yh)t#^=%-rkeopyr@4u@2(fy6o-!upuv2%dncez12j$yj="
+  
+  # mail server
+  smtp: '{{ ansible_nodename }}'
+  mail: 'sentry@{{ ansible_nodename }}'
+  
+  # PostgreSQL  
+  db_user: vagrant
+  db_pass: vagrant
+  db_name: sentry
+  db_host: '{{ ansible_nodename }}'
+  db_port: 5432
+  
+  # Redis
+  redis_host: '{{ ansible_nodename }}'
+  redis_port: 6379
 ...

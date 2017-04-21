@@ -1,26 +1,25 @@
 ---
 - include: provision.yml
 
-- name: PIP | latest sentry is installed
+- name: pip | latest sentry is installed
   pip:
     name: sentry
     state: latest
   tags: packages
 
 - name: init sentry configuration to /etc/sentry
-  #  shell: '{{ sentry_virtualenv }}/bin/sentry init /etc/sentry'
   command: '/usr/bin/sentry init /etc/sentry'
   tags: config
   args:
     creates: /etc/sentry/sentry.conf.py
 
-- name: '/var/log/sentry is writable for {{ sentry_user }}'
+- name: '/var/log/sentry is writable for: {{ sentry.user }}'
   file:
     path: /var/log/sentry
     state: directory
     mode: 'g+w'
-    owner: '{{ sentry_user }}'
-    group: '{{ sentry_user }}'
+    owner: '{{ sentry.user }}'
+    group: '{{ sentry.group }}'
   tags: permissions
 
 
@@ -46,4 +45,4 @@
 - name: db tables are ready
   command: '/usr/bin/sentry --config /etc/sentry/ upgrade --noinput'
   tags: db
-  become_user: '{{  sentry_db_user }}'
+  become_user: '{{  sentry.db_user }}'

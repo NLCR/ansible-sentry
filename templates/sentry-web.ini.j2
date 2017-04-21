@@ -1,7 +1,7 @@
 [program:sentry-web]
 command=/usr/bin/sentry start
 environment=SENTRY_CONF=/etc/sentry
-user={{ sentry_user }}
+user={{ sentry.user }}
 autostart=True
 autorestart=True
 stdout_logfile=/var/log/sentry/sentry-web_stdout.log

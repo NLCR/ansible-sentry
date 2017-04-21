@@ -1,7 +1,7 @@
 [program:sentry-cron]
 command=/usr/bin/sentry run cron
 environment=SENTRY_CONF="/etc/sentry"
-user={{ sentry_user }}
+user={{ sentry.user }}
 autostart=True
 autorestart=True
 stdout_logfile=/var/log/sentry/sentry-cron_stdout.log
